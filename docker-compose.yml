@@ -7,10 +7,7 @@ services:
     volumes:
       - db_volume:/var/lib/mysql
     environment:
-      MYSQL_ROOT_PASSWORD: passoword
-      MYSQL_DATABASE: hubfy-tms-db
-      MYSQL_USER: user
-      MYSQL_PASSWORD: password
-
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
 volumes:
   db_volume:

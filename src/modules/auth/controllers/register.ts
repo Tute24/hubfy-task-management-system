@@ -4,10 +4,8 @@ import { RegisterService } from '../services/register';
 
 export async function register(req: Request) {
   const body = await req.json();
-  console.log(body);
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { name, email, password, confirmPassword } = registerBodySchema.parse(body);
+  const { name, email, password } = registerBodySchema.parse(body);
   const authRepository = new PrismaAuthRespository();
   const registerService = new RegisterService(authRepository);
 

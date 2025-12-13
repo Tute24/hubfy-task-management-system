@@ -1,4 +1,3 @@
-// src/modules/auth/routes/register.route.ts
 import { NextResponse } from 'next/server';
 import { register } from '@/modules/auth/controllers/register';
 import { UserAlreadyExistsError } from '@/modules/auth/errors/user-already-exists-error';

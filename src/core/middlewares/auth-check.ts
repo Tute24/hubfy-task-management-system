@@ -3,7 +3,7 @@ import { MissingSecretKeyError } from '../errors/missing-secret-key-error';
 import { UserNotAuthenticatedError } from '../errors/user-not-authenticated-error';
 import { TokenPayloadType } from '@/types/token-payload-type';
 
-export function middleware(req: Request) {
+export function authCheck(req: Request) {
   const authHeader = req.headers.get('Authorization');
 
   if (authHeader) {

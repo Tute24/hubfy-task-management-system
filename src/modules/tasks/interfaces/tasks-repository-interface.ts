@@ -2,7 +2,7 @@ import { Prisma, Task } from '@prisma/client';
 
 export interface TasksRepository {
   createMany(data: Prisma.TaskCreateManyInput[]): Promise<Prisma.BatchPayload>;
-  getAll(): Promise<Task[]>;
+  getTasks(userId: string): Promise<Task[]>;
   findById(id: number): Promise<Task | null>;
   delete(id: number): Promise<Task>;
 }

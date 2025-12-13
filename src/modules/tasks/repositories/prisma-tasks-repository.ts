@@ -9,8 +9,8 @@ export class PrismaTasksRepository implements TasksRepository {
     return task;
   }
 
-  async getAll() {
-    const tasks = await prisma.task.findMany();
+  async getTasks(userId: string) {
+    const tasks = await prisma.task.findMany({ where: { user_id: userId } });
 
     return tasks;
   }

@@ -9,9 +9,10 @@ const registerBodySchema = z
       .min(8),
     confirmPassword: z.string(),
   })
+  .strict()
   .refine((data) => data.password === data.confirmPassword, {
     path: ['confirmPassword'],
     message: 'Passwords must match!',
-  });
+  }); //o strict aqui do zod evita que a aplicação aceite um body que possua outros campos além dos 4 estabelecidos
 
 export default registerBodySchema;

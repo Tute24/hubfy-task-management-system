@@ -18,5 +18,5 @@ export async function createTasks(req: Request, id: string) {
 
   const { createCount } = await createTaskService.execute({ tasks: formattedtasks });
 
-  return { status: 201, data: { message: `New tasks create: ${createCount}` } };
+  return { status: 201, data: { message: `New tasks created: ${createCount}` } };
 }

@@ -1,4 +1,4 @@
 export type TokenPayloadType = {
-  id: number;
+  id: string;
   email: string;
 };

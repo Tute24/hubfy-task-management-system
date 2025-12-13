@@ -1,7 +1,7 @@
 import { sign } from 'jsonwebtoken';
 import { MissingSecretKeyError } from '../../../core/errors/missing-secret-key-error';
 
-export function generateJwt(id: number, email: string) {
+export function generateJwt(id: string, email: string) {
   if (process.env.SECRET_KEY) {
     const token = sign(
       {

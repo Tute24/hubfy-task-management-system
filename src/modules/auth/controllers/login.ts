@@ -4,7 +4,6 @@ import { LoginService } from '../services/login';
 
 export async function login(req: Request) {
   const body = await req.json();
-  console.log(body);
   const { email, password } = loginBodySchema.parse(body);
 
   const authRepository = new PrismaAuthRespository();

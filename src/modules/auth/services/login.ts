@@ -1,5 +1,5 @@
-import { IncorrectPasswordError } from '../errors/incorrect-password-error';
-import { UserNotFoundError } from '../errors/user-not-found-error';
+import { IncorrectPasswordError } from '../../../core/errors/incorrect-password-error';
+import { UserNotFoundError } from '../../../core/errors/user-not-found-error';
 import { AuthRepository } from '../interfaces/auth-repository-interface';
 import { compare } from 'bcryptjs';
 import { generateJwt } from '../utils/jwt-generator';

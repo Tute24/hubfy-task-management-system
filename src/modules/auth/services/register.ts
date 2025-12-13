@@ -1,4 +1,4 @@
-import { UserAlreadyExistsError } from '../errors/user-already-exists-error';
+import { UserAlreadyExistsError } from '../../../core/errors/user-already-exists-error';
 import { AuthRepository } from '../interfaces/auth-repository-interface';
 import { hash } from 'bcryptjs';
 import { generateJwt } from '../utils/jwt-generator';

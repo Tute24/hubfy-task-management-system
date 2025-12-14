@@ -3,7 +3,6 @@ import { PrismaTasksRepository } from '../repositories/prisma-tasks-repository';
 import { DeleteTaskService } from '../services/delete-task';
 
 export async function deleteTask(req: Request, userId: string, param: string) {
-  console.log(param);
   if (!param) throw new MissingParamError();
   const taskId = Number(param);
 

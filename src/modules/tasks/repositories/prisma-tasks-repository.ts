@@ -23,9 +23,9 @@ export class PrismaTasksRepository implements TasksRepository {
   }
 
   async delete(id: number) {
-    const task = await prisma.task.delete({ where: { id } });
+    await prisma.task.delete({ where: { id } });
 
-    return task;
+    return;
   }
 
   async update(id: number, data: UpdateTaskType) {

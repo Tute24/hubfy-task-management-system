@@ -17,8 +17,8 @@ export class DeleteTaskService {
 
     if (task.user_id !== userId) throw new ForbiddenUserError();
 
-    const deletedTask = await this.tasksRepository.delete(taskId);
+    await this.tasksRepository.delete(taskId);
 
-    return deletedTask;
+    return;
   }
 }

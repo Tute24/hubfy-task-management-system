@@ -7,8 +7,10 @@ const tasksSchema = z.array(
   }),
 );
 
-const tasksBodySchema = z.object({
-  tasks: tasksSchema,
-});
+const tasksBodySchema = z
+  .object({
+    tasks: tasksSchema,
+  })
+  .strict();
 
 export default tasksBodySchema;

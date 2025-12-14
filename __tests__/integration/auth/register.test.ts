@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { testApiHandler } from 'next-test-api-route-handler';
 import * as registerRoute from '@/app/api/auth/register/route';
+import { authMock } from '../../__mocks__/auth-mock';
 
 describe('/api/auth/register', () => {
   it('should register a new user successfully', async () => {
@@ -10,10 +11,10 @@ describe('/api/auth/register', () => {
         const res = await fetch({
           method: 'POST',
           body: JSON.stringify({
-            name: 'John Doe',
-            email: 'john@test.com',
-            password: 'Teste123456!',
-            confirmPassword: 'Teste123456!',
+            name: authMock.name,
+            email: authMock.email,
+            password: authMock.password,
+            confirmPassword: authMock.password,
           }),
         });
 
@@ -21,7 +22,7 @@ describe('/api/auth/register', () => {
 
         expect(res.status).toBe(201);
         expect(body.user).toHaveProperty('id');
-        expect(body.user.email).toBe('john@test.com');
+        expect(body.user.email).toBe(authMock.email);
         expect(body.token).toBeDefined();
       },
     });
@@ -32,10 +33,10 @@ describe('/api/auth/register', () => {
       appHandler: registerRoute,
       async test({ fetch }) {
         const payload = {
-          name: 'John Doe',
-          email: 'john@test.com',
-          password: 'Teste123456!',
-          confirmPassword: 'Teste123456!',
+          name: authMock.name,
+          email: authMock.email,
+          password: authMock.password,
+          confirmPassword: authMock.password,
         };
 
         await fetch({
@@ -63,9 +64,9 @@ describe('/api/auth/register', () => {
         const res = await fetch({
           method: 'POST',
           body: JSON.stringify({
-            name: 'John Doe',
-            email: 'john@test.com',
-            password: 'Teste123456!',
+            name: authMock.name,
+            email: authMock.email,
+            password: authMock.password,
             confirmPassword: 'Teste1234567!',
           }),
         });
@@ -82,10 +83,10 @@ describe('/api/auth/register', () => {
         const res = await fetch({
           method: 'POST',
           body: JSON.stringify({
-            name: 'John Doe',
-            email: 'invalid-email',
-            password: 'Teste123456!',
-            confirmPassword: 'Teste123456!',
+            name: authMock.name,
+            email: 'johnemail.com',
+            password: authMock.password,
+            confirmPassword: authMock.password,
           }),
         });
 
@@ -101,9 +102,9 @@ describe('/api/auth/register', () => {
         const res = await fetch({
           method: 'POST',
           body: JSON.stringify({
-            email: 'missing@test.com',
-            password: 'Teste123456!',
-            confirmPassword: 'Teste123456!',
+            email: authMock.email,
+            password: authMock.password,
+            confirmPassword: authMock.password,
           }),
         });
 

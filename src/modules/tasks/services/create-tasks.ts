@@ -1,4 +1,4 @@
-import { TaskRequestType } from '@/types/task-request-type';
+import { TaskRequestType } from '@/types/task-request-types';
 import { TasksRepository } from '../interfaces/tasks-repository-interface';
 
 interface CreateTasksRequest {

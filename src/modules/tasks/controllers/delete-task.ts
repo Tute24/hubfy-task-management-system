@@ -1,9 +1,7 @@
-import { MissingParamError } from '@/core/errors/missing-params-error';
 import { PrismaTasksRepository } from '../repositories/prisma-tasks-repository';
 import { DeleteTaskService } from '../services/delete-task';
 
-export async function deleteTask(req: Request, userId: string, param: string) {
-  if (!param) throw new MissingParamError();
+export async function deleteTask(userId: string, param: string) {
   const taskId = Number(param);
 
   const tasksRepository = new PrismaTasksRepository();

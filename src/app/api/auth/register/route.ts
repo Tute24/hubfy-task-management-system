@@ -1,7 +1,6 @@
 import { NextResponse } from 'next/server';
 import { register } from '@/modules/auth/controllers/register';
-import { UserAlreadyExistsError } from '@/core/errors/user-already-exists-error';
-import { MissingSecretKeyError } from '@/core/errors/missing-secret-key-error';
+import { UserAlreadyExistsError, MissingSecretKeyError } from '@/core/errors';
 
 export async function POST(req: Request) {
   try {

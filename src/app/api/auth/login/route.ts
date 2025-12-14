@@ -1,7 +1,6 @@
+import { IncorrectPasswordError, MissingSecretKeyError, UserNotFoundError } from '@/core/errors';
 import { login } from '@/modules/auth/controllers/login';
-import { IncorrectPasswordError } from '@/core/errors/incorrect-password-error';
-import { MissingSecretKeyError } from '@/core/errors/missing-secret-key-error';
-import { UserNotFoundError } from '@/core/errors/user-not-found-error';
+
 import { NextResponse } from 'next/server';
 
 export async function POST(req: Request) {

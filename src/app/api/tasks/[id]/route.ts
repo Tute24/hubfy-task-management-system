@@ -1,9 +1,11 @@
-import { ForbiddenUserError } from '@/core/errors/forbidden-user-error';
-import { MissingParamError } from '@/core/errors/missing-params-error';
-import { MissingPropsError } from '@/core/errors/missing-props-error';
-import { MissingSecretKeyError } from '@/core/errors/missing-secret-key-error';
-import { TaskNotFoundError } from '@/core/errors/task-not-found-error';
-import { UserNotAuthenticatedError } from '@/core/errors/user-not-authenticated-error';
+import {
+  ForbiddenUserError,
+  MissingParamError,
+  MissingPropsError,
+  MissingSecretKeyError,
+  TaskNotFoundError,
+  UserNotAuthenticatedError,
+} from '@/core/errors/index';
 import { authCheck } from '@/core/middlewares/auth-check';
 import { deleteTask } from '@/modules/tasks/controllers/delete-task';
 import { updateTask } from '@/modules/tasks/controllers/update-task';
@@ -13,7 +15,7 @@ export async function DELETE(req: Request, { params }: { params: Promise<{ id: s
   try {
     const taskId = (await params).id;
     const userId = authCheck(req).id;
-    await deleteTask(req, userId, taskId);
+    await deleteTask(userId, taskId);
     return NextResponse.json({ message: 'Task successfully deleted.' }, { status: 200 });
   } catch (error) {
     if (error instanceof MissingSecretKeyError || error instanceof MissingParamError)

@@ -1,5 +1,4 @@
-import { MissingSecretKeyError } from '@/core/errors/missing-secret-key-error';
-import { UserNotAuthenticatedError } from '@/core/errors/user-not-authenticated-error';
+import { MissingSecretKeyError, UserNotAuthenticatedError } from '@/core/errors';
 import { authCheck } from '@/core/middlewares/auth-check';
 import { NextResponse } from 'next/server';
 

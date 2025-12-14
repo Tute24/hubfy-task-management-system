@@ -1,7 +1,5 @@
-import { TaskNotFoundError } from '@/core/errors/task-not-found-error';
+import { MissingParamError, TaskNotFoundError, ForbiddenUserError } from '@/core/errors';
 import { TasksRepository } from '../interfaces/tasks-repository-interface';
-import { ForbiddenUserError } from '@/core/errors/forbidden-user-error';
-import { MissingParamError } from '@/core/errors/missing-params-error';
 
 interface DeleteTaskRequest {
   userId: string;

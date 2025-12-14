@@ -1,9 +1,11 @@
 import { UpdateTaskType } from '@/types/task-request-types';
 import { TasksRepository } from '../interfaces/tasks-repository-interface';
-import { MissingParamError } from '@/core/errors/missing-params-error';
-import { MissingPropsError } from '@/core/errors/missing-props-error';
-import { TaskNotFoundError } from '@/core/errors/task-not-found-error';
-import { ForbiddenUserError } from '@/core/errors/forbidden-user-error';
+import {
+  MissingParamError,
+  MissingPropsError,
+  TaskNotFoundError,
+  ForbiddenUserError,
+} from '@/core/errors';
 
 export class UpdateTaskService {
   constructor(private tasksRepository: TasksRepository) {}

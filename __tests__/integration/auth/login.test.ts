@@ -3,6 +3,7 @@ import { testApiHandler } from 'next-test-api-route-handler';
 import * as loginRoute from '@/app/api/auth/login/route';
 import { registerUser } from '../../helpers/auth/register-helper';
 import { authMock } from '../../__mocks__/auth-mock';
+import { RegisterLoginResponseType } from '@/types/responses/register-response-type';
 
 describe('/api/auth/login', () => {
   it('should login a user successfully', async () => {
@@ -18,7 +19,7 @@ describe('/api/auth/login', () => {
           }),
         });
 
-        const body = await res.json();
+        const body: RegisterLoginResponseType = await res.json();
         expect(res.status).toBe(200);
         expect(body.user).toHaveProperty('id');
         expect(body.user.email).toBe(authMock.email);

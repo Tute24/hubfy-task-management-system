@@ -2,7 +2,6 @@ import { describe, it, expect } from 'vitest';
 import { testApiHandler } from 'next-test-api-route-handler';
 import * as logoutRoute from '@/app/api/auth/logout/route';
 import { registerUser } from '../../helpers/auth/register-helper';
-import { authMock } from '../../__mocks__/auth-mock';
 
 describe('/api/auth/login', () => {
   it('should logout a user successfully', async () => {

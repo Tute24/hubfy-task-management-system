@@ -1,6 +1,7 @@
 import { Prisma } from '@prisma/client';
 import { TasksRepository } from '../interfaces/tasks-repository-interface';
 import prisma from '@/core/lib/prisma';
+import { UpdateTaskType } from '@/types/task-request-types';
 
 export class PrismaTasksRepository implements TasksRepository {
   async createMany(data: Prisma.TaskCreateManyInput[]) {
@@ -25,5 +26,9 @@ export class PrismaTasksRepository implements TasksRepository {
     const task = await prisma.task.delete({ where: { id } });
 
     return task;
+  }
+
+  async update(id: number, data: UpdateTaskType) {
+    await prisma.task.update({ where: { id }, data });
   }
 }

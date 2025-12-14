@@ -1,3 +1,4 @@
+import { UpdateTaskType } from '@/types/task-request-types';
 import { Prisma, Task } from '@prisma/client';
 
 export interface TasksRepository {
@@ -5,4 +6,5 @@ export interface TasksRepository {
   getTasks(userId: string): Promise<Task[]>;
   findById(id: number): Promise<Task | null>;
   delete(id: number): Promise<Task>;
+  update(id: number, data: UpdateTaskType): Promise<void>;
 }

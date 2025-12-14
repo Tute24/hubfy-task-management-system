@@ -20,8 +20,10 @@ export class UpdateTaskService {
 
     if (task.user_id !== userId) throw new ForbiddenUserError();
 
-    await this.tasksRepository.update(taskId, data);
+    const updatedTask = await this.tasksRepository.update(taskId, data);
 
-    return;
+    return {
+      task: updatedTask,
+    };
   }
 }

@@ -29,6 +29,7 @@ export class PrismaTasksRepository implements TasksRepository {
   }
 
   async update(id: number, data: UpdateTaskType) {
-    await prisma.task.update({ where: { id }, data });
+    const task = await prisma.task.update({ where: { id }, data });
+    return task;
   }
 }

@@ -35,8 +35,8 @@ export async function PUT(req: Request, { params }: { params: Promise<{ id: stri
   try {
     const taskId = (await params).id;
     const userId = authCheck(req).id;
-    await updateTask(req, userId, taskId);
-    return NextResponse.json({ message: 'Task successfully updated.' }, { status: 200 });
+    const { task } = await updateTask(req, userId, taskId);
+    return NextResponse.json({ message: 'Task successfully updated.', task }, { status: 200 });
   } catch (error) {
     if (
       error instanceof MissingSecretKeyError ||

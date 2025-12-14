@@ -11,7 +11,7 @@ export async function updateTask(req: Request, userId: string, param: string) {
   const tasksRepository = new PrismaTasksRepository();
   const updateTaskService = new UpdateTaskService(tasksRepository);
 
-  await updateTaskService.execute(userId, taskId, updateObject);
+  const { task } = await updateTaskService.execute(userId, taskId, updateObject);
 
-  return;
+  return { task };
 }

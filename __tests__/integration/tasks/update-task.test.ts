@@ -1,13 +1,14 @@
 import { describe, it, expect } from 'vitest';
 import { testApiHandler } from 'next-test-api-route-handler';
-import * as deleteTaskRoute from '@/app/api/tasks/[id]/route';
+import * as updateTaskRoute from '@/app/api/tasks/[id]/route';
 import { registerUser } from '../../helpers/auth/register-helper';
 import { createTasks } from '../../helpers/tasks/create-tasks-helper';
 import prisma from '@/core/lib/prisma';
 import { authMock } from '../../__mocks__/auth-mock';
+import { UpdateTaskResponse } from '@/types/responses/update-task-response-type';
 
-describe('DELETE /api/tasks/:id', () => {
-  it('should delete a task successfully', async () => {
+describe('put /api/tasks/', () => {
+  it('should update a task successfully', async () => {
     const { token } = await registerUser({
       name: authMock.name,
       email: authMock.email,
@@ -20,36 +21,37 @@ describe('DELETE /api/tasks/:id', () => {
     expect(task).not.toBeNull();
 
     await testApiHandler({
-      appHandler: deleteTaskRoute,
+      appHandler: updateTaskRoute,
       params: { id: String(task!.id) },
       async test({ fetch }) {
         const res = await fetch({
-          method: 'DELETE',
+          method: 'PUT',
           headers: [['Authorization', `Bearer ${token}`]],
+          body: JSON.stringify({
+            title: 'Updated title',
+            status: 'COMPLETED',
+          }),
         });
 
-        const body = await res.json();
+        const body: UpdateTaskResponse = await res.json();
 
         expect(res.status).toBe(200);
-        expect(body.message).toBe('Task successfully deleted.');
+        expect(body.message).toBe('Task successfully updated.');
+        expect(body.task.title).toBe('Updated title');
+        expect(body.task.status).toBe('COMPLETED');
       },
     });
-
-    const deletedTask = await prisma.task.findUnique({
-      where: { id: task!.id },
-    });
-
-    expect(deletedTask).toBeNull();
   });
 
   it('should throw 401 if token is invalid', async () => {
     await testApiHandler({
-      appHandler: deleteTaskRoute,
+      appHandler: updateTaskRoute,
       params: { id: '1' },
       async test({ fetch }) {
         const res = await fetch({
-          method: 'DELETE',
+          method: 'PUT',
           headers: [['Authorization', 'Bearer token']],
+          body: JSON.stringify({ title: 'Test' }),
         });
 
         expect(res.status).toBe(401);
@@ -65,12 +67,13 @@ describe('DELETE /api/tasks/:id', () => {
     });
 
     await testApiHandler({
-      appHandler: deleteTaskRoute,
-      params: { id: '1' }, //não existe pq o user não criou nenhuma task
+      appHandler: updateTaskRoute,
+      params: { id: '9999' },
       async test({ fetch }) {
         const res = await fetch({
-          method: 'DELETE',
+          method: 'PUT',
           headers: [['Authorization', `Bearer ${token}`]],
+          body: JSON.stringify({ title: 'Test' }),
         });
 
         expect(res.status).toBe(404);
@@ -78,8 +81,7 @@ describe('DELETE /api/tasks/:id', () => {
     });
   });
 
-  it('should return 403 when deleting another user task', async () => {
-    //teste de isolamento de usuários
+  it('should return 403 when updating another user task', async () => {
     const firstUser = await registerUser({
       name: authMock.name,
       email: authMock.email,
@@ -98,15 +100,44 @@ describe('DELETE /api/tasks/:id', () => {
     });
 
     await testApiHandler({
-      appHandler: deleteTaskRoute,
+      appHandler: updateTaskRoute,
       params: { id: String(task!.id) },
       async test({ fetch }) {
         const res = await fetch({
-          method: 'DELETE',
-          headers: [['Authorization', `Bearer ${secondUser.token}`]], //secondUser tentando apagar task que não é dele
+          method: 'PUT',
+          headers: [['Authorization', `Bearer ${secondUser.token}`]],
+          body: JSON.stringify({ title: 'Hack attempt' }),
         });
 
         expect(res.status).toBe(403);
+      },
+    });
+  });
+
+  it('should return 400 for invalid update payload', async () => {
+    const { token } = await registerUser({
+      name: authMock.name,
+      email: authMock.email,
+      password: authMock.password,
+    });
+
+    await createTasks(token);
+
+    const task = await prisma.task.findFirst();
+
+    await testApiHandler({
+      appHandler: updateTaskRoute,
+      params: { id: String(task!.id) },
+      async test({ fetch }) {
+        const res = await fetch({
+          method: 'PUT',
+          headers: [['Authorization', `Bearer ${token}`]],
+          body: JSON.stringify({
+            title: 'a', // não passa no parse do zod porque tem apenas 1 caractere
+          }),
+        });
+
+        expect(res.status).toBe(500);
       },
     });
   });

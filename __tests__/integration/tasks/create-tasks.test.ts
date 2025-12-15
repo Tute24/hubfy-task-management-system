@@ -3,10 +3,15 @@ import { testApiHandler } from 'next-test-api-route-handler';
 import * as createAndGetTasksRoute from '@/app/api/tasks/route';
 import { registerUser } from '../../helpers/auth/register-helper';
 import { tasksMock } from '../../__mocks__/tasks-mock';
+import { authMock } from '../../__mocks__/auth-mock';
 
 describe('post /api/tasks/', () => {
   it('should create tasks successfully', async () => {
-    const { token } = await registerUser();
+    const { token } = await registerUser({
+      name: authMock.name,
+      email: authMock.email,
+      password: authMock.password,
+    });
     await testApiHandler({
       appHandler: createAndGetTasksRoute,
       async test({ fetch }) {
@@ -43,7 +48,11 @@ describe('post /api/tasks/', () => {
   });
 
   it('should throw 500 if body has additional props', async () => {
-    const { token } = await registerUser();
+    const { token } = await registerUser({
+      name: authMock.name,
+      email: authMock.email,
+      password: authMock.password,
+    });
     await testApiHandler({
       appHandler: createAndGetTasksRoute,
       async test({ fetch }) {
@@ -62,7 +71,11 @@ describe('post /api/tasks/', () => {
   });
 
   it('should throw 500 if type of props is worng', async () => {
-    const { token } = await registerUser();
+    const { token } = await registerUser({
+      name: authMock.name,
+      email: authMock.email,
+      password: authMock.password,
+    });
     await testApiHandler({
       appHandler: createAndGetTasksRoute,
       async test({ fetch }) {

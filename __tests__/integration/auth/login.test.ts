@@ -7,7 +7,11 @@ import { RegisterLoginResponseType } from '@/types/responses/register-response-t
 
 describe('/api/auth/login', () => {
   it('should login a user successfully', async () => {
-    await registerUser();
+    await registerUser({
+      name: authMock.name,
+      email: authMock.email,
+      password: authMock.password,
+    });
     await testApiHandler({
       appHandler: loginRoute,
       async test({ fetch }) {
@@ -29,7 +33,11 @@ describe('/api/auth/login', () => {
   });
 
   it('should throw 401 on incorrect password', async () => {
-    await registerUser();
+    await registerUser({
+      name: authMock.name,
+      email: authMock.email,
+      password: authMock.password,
+    });
     await testApiHandler({
       appHandler: loginRoute,
       async test({ fetch }) {
@@ -49,7 +57,11 @@ describe('/api/auth/login', () => {
   });
 
   it('should throw 401 on user not found', async () => {
-    await registerUser();
+    await registerUser({
+      name: authMock.name,
+      email: authMock.email,
+      password: authMock.password,
+    });
     await testApiHandler({
       appHandler: loginRoute,
       async test({ fetch }) {
@@ -69,7 +81,11 @@ describe('/api/auth/login', () => {
   });
 
   it('should throw 500 on invalid body', async () => {
-    await registerUser();
+    await registerUser({
+      name: authMock.name,
+      email: authMock.email,
+      password: authMock.password,
+    });
     await testApiHandler({
       appHandler: loginRoute,
       async test({ fetch }) {
@@ -87,7 +103,11 @@ describe('/api/auth/login', () => {
   });
 
   it('should throw 500 on invalid email', async () => {
-    await registerUser();
+    await registerUser({
+      name: authMock.name,
+      email: authMock.email,
+      password: authMock.password,
+    });
     await testApiHandler({
       appHandler: loginRoute,
       async test({ fetch }) {
@@ -104,7 +124,11 @@ describe('/api/auth/login', () => {
   });
 
   it('should throw 500 on invalid password', async () => {
-    await registerUser();
+    await registerUser({
+      name: authMock.name,
+      email: authMock.email,
+      password: authMock.password,
+    });
     await testApiHandler({
       appHandler: loginRoute,
       async test({ fetch }) {

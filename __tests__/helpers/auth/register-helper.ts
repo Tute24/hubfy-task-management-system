@@ -1,8 +1,9 @@
 import { testApiHandler } from 'next-test-api-route-handler';
 import * as registerRoute from '@/app/api/auth/register/route';
-import { authMock } from '../../__mocks__/auth-mock';
 import { RegisterLoginResponseType } from '@/types/responses/register-response-type';
-export async function registerUser() {
+import { RegisterServiceRequest } from '@/modules/auth/services/register';
+
+export async function registerUser({ name, email, password }: RegisterServiceRequest) {
   let result: RegisterLoginResponseType | undefined;
   await testApiHandler({
     appHandler: registerRoute,
@@ -10,10 +11,10 @@ export async function registerUser() {
       const res = await fetch({
         method: 'POST',
         body: JSON.stringify({
-          name: authMock.name,
-          email: authMock.email,
-          password: authMock.password,
-          confirmPassword: authMock.password,
+          name: name,
+          email: email,
+          password: password,
+          confirmPassword: password,
         }),
       });
       const body = (await res.json()) as RegisterLoginResponseType;

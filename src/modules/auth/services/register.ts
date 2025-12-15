@@ -3,7 +3,7 @@ import { AuthRepository } from '../interfaces/auth-repository-interface';
 import { hash } from 'bcryptjs';
 import { generateJwt } from '../utils/jwt-generator';
 
-interface RegisterServiceRequest {
+export interface RegisterServiceRequest {
   name: string;
   email: string;
   password: string;

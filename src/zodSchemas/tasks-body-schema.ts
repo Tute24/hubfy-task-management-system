@@ -2,7 +2,7 @@ import z from 'zod';
 
 const tasksSchema = z.array(
   z.object({
-    title: z.string().min(2, { message: 'Enter a valid title with at 2 least 2 characters.' }),
+    title: z.string().min(2, { message: 'Enter a valid title with at least 2 characters.' }),
     description: z.string().optional(),
   }),
 );

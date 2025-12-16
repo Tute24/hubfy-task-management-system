@@ -9,7 +9,7 @@ export interface AxiosHelperProps {
 
 export const axiosInstance = axios.create({
   baseURL: '/api',
-  timeout: 1000 * 5, //timeout de 5s para reqs
+  timeout: 1000 * 10, //timeout de 10s para reqs
 });
 
 export function axiosHelper({ httpMethod, route, body }: AxiosHelperProps) {

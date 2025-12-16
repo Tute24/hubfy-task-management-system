@@ -9,5 +9,5 @@ export const useGeneralStore = create<GeneralStoreType>()(
 
     setIsLoading: (isLoading) => set({ isLoading }),
     setStatusMessage: (statusMessage) => set({ statusMessage }),
-  }),
+  }), //diferentemente das outras stores, não foi utilizado o persist aqui, pois são estados efêmeros por natureza
 );

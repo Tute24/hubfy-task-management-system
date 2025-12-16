@@ -11,6 +11,7 @@ export const useAuthStore = create<AuthStoreType>()(
 
       setToken: (token) => set({ token }),
       setUser: (user) => set({ user }),
+      reset: () => set({ token: null, user: null, hasHydrated: false }), //pra resetar a store inteira, em casos de logout, por exemplo
     }),
     {
       name: 'auth-store',

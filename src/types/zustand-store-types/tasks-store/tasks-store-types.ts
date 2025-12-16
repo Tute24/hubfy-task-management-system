@@ -9,6 +9,7 @@ export type TasksStoreState = {
 export type TasksStoreAction = {
   setTasksArray: (tasks: TaskType[] | []) => void;
   setTask: (task: TaskType | null) => void;
+  reset: () => void;
 };
 
 export type TasksStoreType = TasksStoreState & TasksStoreAction;

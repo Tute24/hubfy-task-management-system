@@ -9,6 +9,7 @@ export type AuthStoreState = {
 export type AuthStoreAction = {
   setToken: (token: string | null) => void;
   setUser: (user: UserType | null) => void;
+  reset: () => void;
 };
 
 export type AuthStoreType = AuthStoreState & AuthStoreAction;

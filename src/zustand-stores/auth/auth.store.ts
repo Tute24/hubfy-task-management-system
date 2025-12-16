@@ -7,11 +7,13 @@ export const useAuthStore = create<AuthStoreType>()(
     (set): AuthStoreType => ({
       token: null,
       user: null,
+      sessionValidated: false,
       hasHydrated: false,
 
       setToken: (token) => set({ token }),
       setUser: (user) => set({ user }),
-      reset: () => set({ token: null, user: null, hasHydrated: false }), //pra resetar a store inteira, em casos de logout, por exemplo
+      setSessionValidated: (sessionValidated) => set({ sessionValidated }),
+      reset: () => set({ token: null, user: null, sessionValidated: false }), //pra resetar a store inteira, em casos de logout, por exemplo
     }),
     {
       name: 'auth-store',

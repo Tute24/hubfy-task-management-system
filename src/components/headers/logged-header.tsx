@@ -1,3 +1,5 @@
+'use client';
+
 import { FilePlusCorner, House, LogOut, Menu } from 'lucide-react';
 import Link from 'next/link';
 import {
@@ -9,8 +11,20 @@ import {
   DropdownMenuTrigger,
 } from '../ui/dropdown-menu';
 import { Button } from '../ui/button';
+import { logoutRequest } from '@/requests/auth/logout';
+import { useRouter } from 'next/navigation';
 
 export default function LoggedHeader() {
+  const router = useRouter();
+  async function logoutHandler() {
+    const response = await logoutRequest();
+    if (response.success) {
+      window.alert(response.message);
+      router.push('/');
+    } else {
+      window.alert(response.message);
+    }
+  }
   return (
     <>
       <div className="flex flex-row py-5 max-h-21.25 text-center items-center w-full">
@@ -64,7 +78,7 @@ export default function LoggedHeader() {
                     requestHandler={signOutHandler}
                     isLoading={isLoading}
                     buttonLayout={ */}
-                  <Button variant={'ghost'} className="cursor-pointer">
+                  <Button onClick={logoutHandler} variant={'ghost'} className="cursor-pointer">
                     <LogOut className="text-cyan-700" size={30} />
                     <div className="text-cyan-700 font-semibold text-lg">Log out</div>
                   </Button>

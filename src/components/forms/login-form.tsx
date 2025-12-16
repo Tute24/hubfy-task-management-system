@@ -11,12 +11,15 @@ import loginBodySchema from '@/zodSchemas/login-body-schema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useGeneralStore } from '@/zustand-stores/general/general.store';
 import { LoadingSpinner } from '../spinners/loading-spinner';
+import { loginRequest } from '@/requests/auth/login';
+import { useRouter } from 'next/navigation';
 
 export type LoginType = z.infer<typeof loginBodySchema>;
 
 export default function LoginForm() {
   const isLoading = useGeneralStore((store) => store.isLoading);
   const statusMessage = useGeneralStore((store) => store.statusMessage);
+  const router = useRouter();
 
   const {
     register,
@@ -26,8 +29,9 @@ export default function LoginForm() {
     resolver: zodResolver(loginBodySchema),
   });
 
-  const onSubmit: SubmitHandler<LoginType> = (data) => {
-    console.log(data);
+  const onSubmit: SubmitHandler<LoginType> = async (data) => {
+    const result = await loginRequest(data);
+    if (result.success) router.push('/portal/dashboard');
   };
   return (
     <div className="flex flex-col items-center justify-center m-auto pt-10 font-inter">

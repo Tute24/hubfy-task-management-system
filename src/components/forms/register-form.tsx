@@ -10,11 +10,14 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import z from 'zod';
 import registerBodySchema from '@/zodSchemas/register-body-schema';
 import { LoadingSpinner } from '../spinners/loading-spinner';
+import { registerRequest } from '@/requests/auth/register';
+import { useRouter } from 'next/navigation';
 
 export type RegisterType = z.infer<typeof registerBodySchema>;
 export default function RegisterForm() {
   const isLoading = useGeneralStore((store) => store.isLoading);
   const statusMessage = useGeneralStore((store) => store.statusMessage);
+  const router = useRouter();
 
   const {
     register,
@@ -24,8 +27,9 @@ export default function RegisterForm() {
     resolver: zodResolver(registerBodySchema),
   });
 
-  const onSubmit: SubmitHandler<RegisterType> = (data) => {
-    console.log(data);
+  const onSubmit: SubmitHandler<RegisterType> = async (data) => {
+    const response = await registerRequest(data);
+    if (response.success) router.push('/portal/dashboard');
   };
   return (
     <div className="flex flex-col items-center justify-center m-auto pt-10 font-inter">

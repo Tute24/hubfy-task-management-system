@@ -46,7 +46,7 @@ export default function LoggedHeader() {
               requestHandler={signOutHandler}
               isLoading={isLoading}
               buttonLayout={ */}
-            <Button variant={'ghost'} className="cursor-pointer">
+            <Button onClick={logoutHandler} variant={'ghost'} className="cursor-pointer">
               <LogOut className="text-cyan-700" size={30} />
               <div className="text-cyan-700 font-semibold text-xl">Log Out</div>
             </Button>

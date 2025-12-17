@@ -52,6 +52,7 @@ export default function RegisterForm() {
                   type="text"
                   {...register('name')}
                   placeholder="Your name here"
+                  required
                 />
                 {errors.name && <p className="text-red-600 text-sm ">{errors.name.message}</p>}
               </div>
@@ -65,6 +66,7 @@ export default function RegisterForm() {
                   type="text"
                   {...register('email')}
                   placeholder="Your e-mail here"
+                  required
                 />
                 {errors.email && <p className="text-red-600 text-sm">{errors.email.message}</p>}
               </div>
@@ -80,6 +82,7 @@ export default function RegisterForm() {
                   type="password"
                   {...register('password')}
                   placeholder="Your password here"
+                  required
                 />
                 {errors.password && (
                   <p className="text-red-600 text-sm">{errors.password.message}</p>
@@ -97,6 +100,7 @@ export default function RegisterForm() {
                   type="password"
                   {...register('confirmPassword')}
                   placeholder="Your password here"
+                  required
                 />
                 {errors.confirmPassword && (
                   <p className="text-red-600 text-sm">{errors.confirmPassword.message}</p>

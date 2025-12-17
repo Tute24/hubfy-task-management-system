@@ -40,48 +40,50 @@ export default function DashboardPage() {
           <HydrationSpinner />
         ) : (
           <>
-            <div className="flex justify-between pb-5 items-center">
-              <p className="text-lg">Status filter:</p>
-              <Select
-                value={statusFilter}
-                onValueChange={(value) =>
-                  setStatusFilter(value as 'ALL' | 'PENDING' | 'IN_PROGRESS' | 'COMPLETED')
-                }
-              >
-                <SelectTrigger className="w-40">
-                  <SelectValue placeholder="Filter by status" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
-                    <SelectItem value="ALL">All</SelectItem>
-                    <SelectItem value="PENDING">Pending</SelectItem>
-                    <SelectItem value="IN_PROGRESS">In Progress</SelectItem>
-                    <SelectItem value="COMPLETED">Completed</SelectItem>
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
-            </div>
-            <div>
-              {filteredTasks.length === 0 ? (
-                <h2 className="text-lg font-bold">No tasks to show.</h2>
-              ) : (
-                <ul className="flex flex-col gap-5">
-                  {filteredTasks.map((task) => (
-                    <li key={task.id}>
-                      <TaskCard
-                        id={task.id}
-                        title={task.title}
-                        description={task.description ?? ''}
-                        status={task.status}
-                        created_at={task.created_at}
-                        isDeleting={isDeleting}
-                        setIsDeleting={setIsDeleting}
-                        statusMessage={statusMessage ?? ''}
-                      />
-                    </li>
-                  ))}
-                </ul>
-              )}
+            <div className="w-90 sm:min-w-105">
+              <div className="flex justify-between pb-5 items-center">
+                <p className="text-lg">Status filter:</p>
+                <Select
+                  value={statusFilter}
+                  onValueChange={(value) =>
+                    setStatusFilter(value as 'ALL' | 'PENDING' | 'IN_PROGRESS' | 'COMPLETED')
+                  }
+                >
+                  <SelectTrigger className="w-40">
+                    <SelectValue placeholder="Filter by status" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectItem value="ALL">All</SelectItem>
+                      <SelectItem value="PENDING">Pending</SelectItem>
+                      <SelectItem value="IN_PROGRESS">In Progress</SelectItem>
+                      <SelectItem value="COMPLETED">Completed</SelectItem>
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div>
+                {filteredTasks.length === 0 ? (
+                  <h2 className="text-lg font-bold text-center">No tasks to show.</h2>
+                ) : (
+                  <ul className="flex flex-col gap-5">
+                    {filteredTasks.map((task) => (
+                      <li key={task.id}>
+                        <TaskCard
+                          id={task.id}
+                          title={task.title}
+                          description={task.description ?? ''}
+                          status={task.status}
+                          created_at={task.created_at}
+                          isDeleting={isDeleting}
+                          setIsDeleting={setIsDeleting}
+                          statusMessage={statusMessage ?? ''}
+                        />
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
             </div>
           </>
         )}

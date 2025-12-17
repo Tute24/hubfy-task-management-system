@@ -11,6 +11,8 @@ import tasksBodySchema from '@/zodSchemas/tasks-body-schema';
 import { Button } from '../ui/button';
 import { LoadingSpinner } from '../spinners/loading-spinner';
 import { useGeneralStore } from '@/zustand-stores/general/general.store';
+import { createTasksRequest } from '@/requests/tasks/create-tasks';
+import { Textarea } from '../ui/textarea';
 
 export type CreateTasksType = z.infer<typeof tasksBodySchema>;
 
@@ -19,6 +21,7 @@ export default function CreateTasksForm() {
     control,
     register,
     handleSubmit,
+    reset,
     formState: { errors, isSubmitting },
   } = useForm<CreateTasksType>({
     resolver: zodResolver(tasksBodySchema),
@@ -31,8 +34,9 @@ export default function CreateTasksForm() {
     name: 'tasks',
   });
   const statusMessage = useGeneralStore((store) => store.statusMessage);
-  const onSubmit: SubmitHandler<CreateTasksType> = (data) => {
-    console.log(data);
+  const onSubmit: SubmitHandler<CreateTasksType> = async (data) => {
+    await createTasksRequest(data);
+    reset();
   };
   return (
     <div className="flex flex-col items-center justify-center m-auto pt-10 font-inter">
@@ -80,9 +84,8 @@ export default function CreateTasksForm() {
                     <Label htmlFor={`description-${index}`} className="text-md text-stone-700">
                       {`Task description (optional)`}
                     </Label>
-                    <Input
+                    <Textarea
                       className="text-md text-cyan-700"
-                      type="text"
                       id={`description-${index}`}
                       {...register(`tasks.${index}.description`)}
                       placeholder="Inser the task description"
@@ -112,7 +115,11 @@ export default function CreateTasksForm() {
               >
                 {isSubmitting ? <LoadingSpinner /> : 'Submit'}
               </Button>
-              <span className="text-red-600 text-sm pt-2">{statusMessage}</span>
+              <span
+                className={`m-auto text-md font-semibold ${statusMessage === 'Tasks created successfully.' ? 'text-green-600' : 'text-red-600'}`}
+              >
+                {statusMessage}
+              </span>
             </div>
           </form>
         </CardContent>

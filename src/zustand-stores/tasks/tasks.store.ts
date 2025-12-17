@@ -11,7 +11,7 @@ export const useTasksStore = create<TasksStoreType>()(
 
       setTasksArray: (tasksArray) => set({ tasksArray }),
       setTask: (task) => set({ task }),
-      reset: () => ({ tasksArray: [], task: null, hasHydrated: false }),
+      reset: () => set({ tasksArray: [], task: null }),
     }),
     {
       name: 'tasks-store',

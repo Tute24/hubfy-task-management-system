@@ -10,6 +10,7 @@ import { useEffect, useState } from 'react';
 
 export default function DashboardPage() {
   const isLoading = useGeneralStore((store) => store.isLoading);
+  const statusMessage = useGeneralStore((store) => store.statusMessage);
   const tasksArray = useTasksStore((store) => store.tasksArray);
   const hasHydrated = useTasksStore((store) => store.hasHydrated);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -17,7 +18,7 @@ export default function DashboardPage() {
     getTasksRequest();
   }, []);
   return (
-    <div className="flex flex-col gap-5 sm:gap-20 pb-5">
+    <div className="flex flex-col gap-5 sm:gap-20 pb-5 font-inter">
       <LoggedHeader />
       <div className="flex flex-col m-auto">
         {!hasHydrated || isLoading ? (
@@ -25,7 +26,7 @@ export default function DashboardPage() {
         ) : (
           <div>
             {tasksArray.length === 0 ? (
-              `No tasks created.`
+              <h2 className="text-lg font-bold">No tasks to show.</h2>
             ) : (
               <ul className="flex flex-col gap-5">
                 {tasksArray.sort().map((task) => (
@@ -38,6 +39,7 @@ export default function DashboardPage() {
                       created_at={task.created_at}
                       isDeleting={isDeleting}
                       setIsDeleting={setIsDeleting}
+                      statusMessage={statusMessage ?? ''}
                     />
                   </li>
                 ))}

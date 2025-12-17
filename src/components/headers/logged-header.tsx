@@ -14,9 +14,11 @@ import { Button } from '../ui/button';
 import { logoutRequest } from '@/requests/auth/logout';
 import { useRouter } from 'next/navigation';
 import { useGeneralStore } from '@/zustand-stores/general/general.store';
+import { useAuthStore } from '@/zustand-stores/auth/auth.store';
 
 export default function LoggedHeader() {
   const setStatusMessage = useGeneralStore((store) => store.setStatusMessage);
+  const user = useAuthStore((store) => store.user);
   const router = useRouter();
   async function logoutHandler() {
     const response = await logoutRequest();
@@ -31,10 +33,13 @@ export default function LoggedHeader() {
     <>
       <div className="flex flex-row py-5 max-h-21.25 text-center items-center w-full">
         <nav className="flex items-center justify-between flex-row w-full px-5 sm:text-xl font-poppins font-semibold">
-          <div data-testid="dashboard-reference cursor-pointer">
-            <Link onClick={() => setStatusMessage('')} href="/portal/dashboard">
-              <House className="text-cyan-700" size={50} />
-            </Link>
+          <div className="flex flex-row gap-2 sm:gap-5 items-center">
+            <div data-testid="dashboard-reference cursor-pointer">
+              <Link onClick={() => setStatusMessage('')} href="/portal/dashboard">
+                <House className="text-cyan-700" size={50} />
+              </Link>
+            </div>
+            Welcome, {user?.name}
           </div>
           <div className="hidden sm:block">
             <Link onClick={() => setStatusMessage('')} href="/portal/create-tasks">

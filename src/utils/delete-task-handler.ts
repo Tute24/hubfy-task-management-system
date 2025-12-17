@@ -1,11 +1,11 @@
 import { deleteTaskRequest } from '@/requests/tasks/delete-task';
 
-export interface deleteUserHandlerProps {
+export interface deleteTaskHandlerProps {
   taskId: number;
   setIsDeleting: (isDeleting: boolean) => void;
 }
 
-export async function deleteUserHandler({ taskId, setIsDeleting }: deleteUserHandlerProps) {
+export async function deleteTaskHandler({ taskId, setIsDeleting }: deleteTaskHandlerProps) {
   try {
     setIsDeleting(true);
     const response = await deleteTaskRequest(taskId);

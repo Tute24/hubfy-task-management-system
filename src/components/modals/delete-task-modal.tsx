@@ -16,6 +16,7 @@ export interface ModalComponentProps {
   isDeleting: boolean;
   requestHandler: () => void;
   buttonLayout: React.ReactNode;
+  statusMessage: string;
 }
 
 export function DeleteTaskModal({
@@ -23,6 +24,7 @@ export function DeleteTaskModal({
   isDeleting,
   requestHandler,
   buttonLayout,
+  statusMessage,
 }: ModalComponentProps) {
   return (
     <Dialog>
@@ -49,6 +51,7 @@ export function DeleteTaskModal({
             {isDeleting ? <LoadingSpinner /> : 'Delete Task'}
           </Button>
         </DialogFooter>
+        <span className="text-sm text-red-600 text-center">{statusMessage}</span>
       </DialogContent>
     </Dialog>
   );

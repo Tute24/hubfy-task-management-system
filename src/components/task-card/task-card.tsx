@@ -48,6 +48,7 @@ export default function TaskCard({
           <DeleteTaskModal
             title={title}
             isDeleting={isDeleting}
+            statusMessage={statusMessage}
             requestHandler={() => deleteTaskHandler({ taskId: id, setIsDeleting: setIsDeleting })}
             buttonLayout={
               <Button variant="ghost" className="cursor-pointer">

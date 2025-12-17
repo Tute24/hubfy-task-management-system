@@ -18,8 +18,9 @@ export default function DashboardPage() {
     getTasksRequest();
   }, []);
   return (
-    <div className="flex flex-col gap-5 sm:gap-20 pb-5 font-inter">
+    <div className="flex flex-col gap-5 sm:gap-10 pb-5 font-inter">
       <LoggedHeader />
+      <h1 className="text-center text-xl sm:text-2xl font-bold text-cyan-700">Tasks List:</h1>
       <div className="flex flex-col m-auto">
         {!hasHydrated || isLoading ? (
           <HydrationSpinner />

@@ -25,7 +25,8 @@ import {
   SelectValue,
   SelectItem,
 } from '../ui/select';
-import { updateTaskRequest } from '@/requests/tasks/update-task';
+import { updateTaskHandler } from '@/utils/update-task-handler';
+import { useState } from 'react';
 
 export interface ModalComponentProps {
   id: number;
@@ -44,6 +45,7 @@ export function UpdateTaskModal({
   buttonLayout,
   statusMessage,
 }: ModalComponentProps) {
+  const [open, setOpen] = useState(false);
   const {
     register,
     handleSubmit,
@@ -59,10 +61,11 @@ export function UpdateTaskModal({
   });
 
   const onSubmit: SubmitHandler<UpdateTaskType> = async (data) => {
-    await updateTaskRequest(id, data);
+    await updateTaskHandler({ taskId: id, data });
+    setOpen(false);
   };
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>{buttonLayout}</DialogTrigger>
       <DialogContent className="w-100 sm:w-105 flex flex-col gap-3">
         <form onSubmit={handleSubmit(onSubmit)}>

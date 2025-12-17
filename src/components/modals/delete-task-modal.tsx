@@ -27,7 +27,7 @@ export function DeleteTaskModal({
   return (
     <Dialog>
       <DialogTrigger asChild>{buttonLayout}</DialogTrigger>
-      <DialogContent className="max-w-105 sm:max-w-90">
+      <DialogContent className="w-100 sm:w-105">
         <DialogHeader>
           <DialogTitle>Delete Task</DialogTitle>
           <DialogDescription className="font-semibold text-cyan-700">

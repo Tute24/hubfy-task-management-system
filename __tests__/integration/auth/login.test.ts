@@ -3,7 +3,7 @@ import { testApiHandler } from 'next-test-api-route-handler';
 import * as loginRoute from '@/app/api/auth/login/route';
 import { registerUser } from '../../helpers/auth/register-helper';
 import { authMock } from '../../__mocks__/auth-mock';
-import { RegisterLoginResponseType } from '@/types/responses/register-response-type';
+import { RegisterLoginResponseType } from '@/types/responses/register-login-response-type';
 
 describe('/api/auth/login', () => {
   it('should login a user successfully', async () => {

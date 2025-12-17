@@ -1,6 +1,6 @@
 import { testApiHandler } from 'next-test-api-route-handler';
 import * as registerRoute from '@/app/api/auth/register/route';
-import { RegisterLoginResponseType } from '@/types/responses/register-response-type';
+import { RegisterLoginResponseType } from '@/types/responses/register-login-response-type';
 import { RegisterServiceRequest } from '@/modules/auth/services/register';
 
 export async function registerUser({ name, email, password }: RegisterServiceRequest) {

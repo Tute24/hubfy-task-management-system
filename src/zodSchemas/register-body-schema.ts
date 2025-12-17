@@ -2,11 +2,11 @@ import z from 'zod';
 
 const registerBodySchema = z
   .object({
-    name: z.string({ message: 'Name must be at least 2 letters long!' }).min(2),
+    name: z.string().min(2, { message: 'Name must be at least 2 letters long!' }),
     email: z.email({ message: 'Not a valid email address!' }),
     password: z
-      .string({ message: 'Not a valid password, must contain at leat 8 charachters!' })
-      .min(8),
+      .string()
+      .min(8, { message: 'Not a valid password, must contain at leat 8 charachters!' }),
     confirmPassword: z.string(),
   })
   .strict()

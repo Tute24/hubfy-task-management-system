@@ -40,7 +40,11 @@ export default function TaskCard({
             status={status}
             statusMessage={statusMessage}
             buttonLayout={
-              <Button variant="ghost" className="cursor-pointer">
+              <Button
+                data-testid={`update-task-button-${id}`}
+                variant="ghost"
+                className="cursor-pointer"
+              >
                 <Pencil size={16} className="text-green-600" />
               </Button>
             }
@@ -51,7 +55,11 @@ export default function TaskCard({
             statusMessage={statusMessage}
             requestHandler={() => deleteTaskHandler({ taskId: id, setIsDeleting: setIsDeleting })}
             buttonLayout={
-              <Button variant="ghost" className="cursor-pointer">
+              <Button
+                data-testid={`delete-task-button-${id}`}
+                variant="ghost"
+                className="cursor-pointer"
+              >
                 <Trash size={16} className="text-red-600" />
               </Button>
             }

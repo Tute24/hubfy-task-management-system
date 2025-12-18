@@ -61,6 +61,7 @@ export default function CreateTasksForm() {
                           type="button"
                           className="cursor-pointer"
                           onClick={() => remove(index)}
+                          data-testid={`remove-fields-${index}`}
                         >
                           <CircleX size={18} className="text-red-600" />
                         </button>
@@ -88,7 +89,7 @@ export default function CreateTasksForm() {
                       className="text-md text-cyan-700"
                       id={`description-${index}`}
                       {...register(`tasks.${index}.description`)}
-                      placeholder="Inser the task description"
+                      placeholder="Insert the task description"
                     />
                     {errors.tasks?.[index]?.description && (
                       <p className="text-red-600 text-sm">
@@ -101,6 +102,7 @@ export default function CreateTasksForm() {
               <Button
                 type="button"
                 className="cursor-pointer w-full font-bold text-lg text-black bg-cyan-500 hover:text-white"
+                disabled={isSubmitting}
                 onClick={(e) => {
                   e.preventDefault();
                   append({ title: '', description: '' });

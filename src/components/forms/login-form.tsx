@@ -82,7 +82,7 @@ export default function LoginForm() {
                   type="submit"
                   disabled={isSubmitting}
                 >
-                  {isSubmitting || isLoading ? <LoadingSpinner /> : 'Sign In'}
+                  {isSubmitting || isLoading ? <LoadingSpinner /> : 'Log In'}
                 </Button>
                 <span className="text-red-600 text-sm pt-2">{statusMessage}</span>
               </div>

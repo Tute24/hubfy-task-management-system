@@ -44,7 +44,7 @@ export default function RegisterForm() {
             <div className="flex flex-col items-start gap-3 font- w-full">
               <div className="flex flex-col gap-2 items-start justify-start w-full">
                 <Label htmlFor="name" className="text-md text-stone-700">
-                  Enter your name
+                  Enter your first name
                 </Label>
                 <Input
                   className="text-md text-cyan-700"
@@ -99,7 +99,7 @@ export default function RegisterForm() {
                   id="confirmPassword"
                   type="password"
                   {...register('confirmPassword')}
-                  placeholder="Your password here"
+                  placeholder="Confirm your password"
                   required
                 />
                 {errors.confirmPassword && (

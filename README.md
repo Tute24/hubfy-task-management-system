@@ -46,9 +46,9 @@ Para criar e gerenciar tarefas, o usuário precisa estar autenticado na aplicaç
 
 ## 🛠️ Instalação e execução do projeto  
 
-📥 **Clonando o repositório:**  
+📥 **Clonando o repositório (PRIMEIRO STEP PRIMORDIAL):**  
 
-    ```bash  
+```bash  
 git clone https://github.com/Tute24/hubfy-task-management-system
 ```  
 
@@ -82,42 +82,41 @@ docker-compose up --build
 
 ## 💻 Rodando o projeto com MySQL em Docker e Next.js localmente:  
 
-Embora o projeto tenha sido pensado para rodar totalmente via Docker, também é possível executar o Next.js localmente.  
+Embora o projeto tenha sido pensado para rodar totalmente via Docker, também é possível executar o Next.js localmente. Considerando que as variáveis do serviço do mysql já foram configuradas no step anterior, o passo-a-passo é esse: 
 
 1️⃣ Instalar dependências  
 
-    ```bash  
+```bash  
 npm install  
 ```  
+2️⃣ Comentar ou retirar o service do next no docker-compose.yml, e rodar somento o service do sql:
 
-2️⃣ Subir apenas o banco de dados  
+```bash  
+docker-compose up --build  
+```
 
-    ```bash  
-git clone https://github.com/Tute24/hubfy-task-management-system
-``` 
+⚠️ **ATENÇÃO**  
+Ao rodar o Next.js sem Docker, é necessário substituir @db por @localhost na variável DATABASE_URL.
 
 3️⃣ Executar migrations e gerar o Prisma Client 
 
-    ```bash  
+```bash  
 npx prisma migrate dev  
+```
 
-
-    ```bash  
+```bash  
 npx prisma generate  
 ```  
 
 4️⃣ Iniciar o Next.js em modo desenvolvimento  
 
-    ```bash  
+```bash  
 npm run dev  
 ```  
 
 ## 🔐 Variáveis de ambiente:  
 
-As variáveis de ambiente devem seguir o padrão do arquivo .env.example.  
-
-⚠️ **ATENÇÃO**  
-Ao rodar o Next.js sem Docker, é necessário substituir @db por @localhost na variável DATABASE_URL.  
+As variáveis de ambiente devem seguir o padrão do arquivo .env.example.    
 
 ## 🧪 Como rodar os testes unitários:  
 
@@ -125,13 +124,13 @@ Mesmo que o projeto esteja rodando via Docker, os testes unitários do frontend 
 
 ▶️ Instalar dependências  
 
-    ```bash  
+```bash  
 npm install  
 ```  
 
 ▶️ Executar testes unitários  
 
-    ```bash  
+```bash  
 npm run test:unit  
 ```  
 

@@ -134,6 +134,15 @@ npm install
 npm run test:unit  
 ```  
 
+▶️ Executar testes de integração automatizados
+
+Para executar os testes de integração, é necessário criar o .env.test de acordo com o .env.test.example, 
+já que os testes irão rodar em uma db (efêmera) diferente da dev db. Após criação do .env.test, rodar:
+
+```bash  
+npm run test:integration 
+``` 
+
 ## 🗂️ Estrutura de pastas do projeto:  
 
 __tests__/          → Testes unitários e de integração  
@@ -177,6 +186,10 @@ Padronização visual e produtividade com shadcn/ui.
 State management com Zustand, incluindo persistência em sessionStorage e tratamento de hidratação.  
 
 Pipeline de CI com GitHub Actions, garantindo execução de testes e lint a cada alteração no código.  
+
+Resolvi direcionar o usuário para o dashboard após seu registro, ao invés de redirecionar ele de volta pra página de login, pois acredito que assim o fluxo da aplicação fica mais fluido.
+
+O id do usuário, ao invés de ser um número que auto incrementa, é um random uuid, pois acredito ser mais seguro.
 
 ## 🔮 Futuras melhorias  
 

@@ -49,8 +49,9 @@ Para criar e gerenciar tarefas, o usuário precisa estar autenticado na aplicaç
 📥 **Clonando o repositório:**  
 
     ```bash  
-git clone [https://github.com/Tute24/hubfy-task-management-system](https://github.com/Tute24/hubfy-task-management-system)  
+git clone https://github.com/Tute24/hubfy-task-management-system
 ```  
+
 🐳 **Rodando o projeto completo via Docker Compose:**  
 
 Certifique-se de ter o Docker e o Docker Compose instalados e em execução.  
@@ -74,26 +75,33 @@ SECRET_KEY
 As variáveis seguem o modelo descrito em .env.example.  
 
 ▶️ **Executando:**  
-docker-compose up --build  
+
+```bash
+docker-compose up --build 
+``` 
 
 ## 💻 Rodando o projeto com MySQL em Docker e Next.js localmente:  
 
 Embora o projeto tenha sido pensado para rodar totalmente via Docker, também é possível executar o Next.js localmente.  
 
 1️⃣ Instalar dependências  
+
     ```bash  
 npm install  
 ```  
 
 2️⃣ Subir apenas o banco de dados  
-    ```bash  
-docker-compose up --build  
-```  
 
-3️⃣ Executar migrations e gerar o Prisma Client  
+    ```bash  
+git clone https://github.com/Tute24/hubfy-task-management-system
+``` 
+
+3️⃣ Executar migrations e gerar o Prisma Client 
+
     ```bash  
 npx prisma migrate dev  
-```     
+
+
     ```bash  
 npx prisma generate  
 ```  
@@ -108,7 +116,7 @@ npm run dev
 
 As variáveis de ambiente devem seguir o padrão do arquivo .env.example.  
 
-⚠️ ****ATEN**ÇÃO**  
+⚠️ **ATENÇÃO**  
 Ao rodar o Next.js sem Docker, é necessário substituir @db por @localhost na variável DATABASE_URL.  
 
 ## 🧪 Como rodar os testes unitários:  
@@ -116,17 +124,20 @@ Ao rodar o Next.js sem Docker, é necessário substituir @db por @localhost na v
 Mesmo que o projeto esteja rodando via Docker, os testes unitários do frontend devem ser executados localmente.  
 
 ▶️ Instalar dependências  
+
     ```bash  
 npm install  
 ```  
 
 ▶️ Executar testes unitários  
+
     ```bash  
 npm run test:unit  
 ```  
 
 ## 🗂️ Estrutura de pastas do projeto:  
-__tests__/           → Testes unitários e de integração  
+
+__tests__/          → Testes unitários e de integração  
 .github/             → Pipeline de CI (GitHub Actions)  
 .vscode/             → Configurações do Prisma v6  
 prisma/              → Schema e migrations do banco  

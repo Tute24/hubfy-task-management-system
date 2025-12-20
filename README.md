@@ -1,3 +1,8 @@
+## Meu contato:
+
+e-mail: arthurtute01@gmail.com
+linkedin: https://www.linkedin.com/in/arthur-martins-araujo-824b14192/
+
 ## 📋 Projeto Task Management System  
 
 O **Task Management System** é uma aplicação full stack que permite aos usuários criarem e gerenciarem tarefas para organizar o dia a dia.    

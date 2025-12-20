@@ -1,0 +1,33 @@
+services:
+  db:
+    image: mysql:8
+    restart: always
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_volume:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD} #substituir pela senha desejada (default é password)
+      MYSQL_DATABASE: ${MYSQL_DATABASE} #substituir pelo nome da database desejada
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"] #healthcheck pra que o serviço do next só inicie após o db estar pronto (depends_on)
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  next:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+      args:
+        DATABASE_URL: ${DATABASE_URL} #substituir pela variável do .env
+        SECRET_KEY: ${SECRET_KEY} #substituir pela variável do .env
+    ports:
+     - '3000:3000'
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  db_volume:

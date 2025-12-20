@@ -79,10 +79,10 @@ As variáveis seguem o modelo descrito em .env.example.
 ```bash
 docker-compose up --build 
 ``` 
-
+Quando estiver tudo pronto, abrir http://localhost:3000/ no browser e navegar pelo projeto
 ## 💻 Rodando o projeto com MySQL em Docker e Next.js localmente:  
 
-Embora o projeto tenha sido pensado para rodar totalmente via Docker, também é possível executar o Next.js localmente. Considerando que as variáveis do serviço do mysql já foram configuradas no step anterior, o passo-a-passo é esse: 
+Embora o projeto tenha sido pensado para rodar totalmente via Docker, também é possível executar o Next.js localmente. Considerando que as variáveis do serviço do mysql já foram configuradas no step anterior, e que o arquivo .env já foi criado baseado no .env.example, o passo-a-passo é esse: 
 
 1️⃣ Instalar dependências  
 
@@ -122,7 +122,7 @@ As variáveis de ambiente devem seguir o padrão do arquivo .env.example.
 
 Mesmo que o projeto esteja rodando via Docker, os testes unitários do frontend devem ser executados localmente.  
 
-▶️ Instalar dependências  
+▶️ Instalar dependências (caso ainda não tenha sido feito)
 
 ```bash  
 npm install  
